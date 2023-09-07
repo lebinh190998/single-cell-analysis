@@ -1,0 +1,28 @@
+openapi: 3.0.0
+info:
+ title: Your API Title
+ version: 1.0.0
+ description: Your API Description
+paths:
+ /analysis/default:
+  get:
+   summary: Analyse single-cell Goolam data
+   responses:
+    "200":
+     description: Single-cell Goolam data
+ /analysis/custom-data:
+  post:
+   summary: Analyse single-cell custom data from a file
+   requestBody:
+    required: true
+    content:
+     multipart/form-data:
+      schema:
+       type: object
+       properties:
+        file:
+         type: string
+         format: binary
+   responses:
+    "200":
+     description: Single-cell custom data analysis result
