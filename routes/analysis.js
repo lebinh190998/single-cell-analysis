@@ -9,7 +9,8 @@ router.get("/default", async (req, res) => {
 		const rRunner = new RScriptRunner(rScriptPath);
 
 		const parsedData = await rRunner.run();
-		console.log("Parsed Data:", parsedData);
+		console.log("cluster length:", parsedData.cluster.length);
+		console.log("pred length:", parsedData.pred.length);
 		res.send(parsedData);
 	} catch (error) {
 		console.error(error);

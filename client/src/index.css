@@ -1,0 +1,15 @@
+/* index.css */
+
+/* Reset the margin on the body to 0 to remove any default margin */
+body {
+  margin: 0;
+}
+
+/* Add styles to make the root element (usually #root in a React app) fill the entire viewport */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

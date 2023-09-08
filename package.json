@@ -1,17 +1,25 @@
 {
-  "name": "scdha-app",
-  "version": "1.0.0",
-  "description": "Application for scDHA",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Le Binh",
-  "license": "ISC",
-  "dependencies": {
-    "child-process": "^1.0.2",
-    "express": "^4.18.2",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
-  }
+	"name": "scdha-app",
+	"version": "1.0.0",
+	"description": "Application for scDHA",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server",
+		"server": "nodemon server",
+		"client": "npm run dev --prefix client",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Le Binh",
+	"license": "ISC",
+	"dependencies": {
+		"child-process": "^1.0.2",
+		"express": "^4.18.2",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.0"
+	},
+	"devDependencies": {
+		"concurrently": "^8.2.1",
+		"nodemon": "^3.0.1"
+	}
 }
