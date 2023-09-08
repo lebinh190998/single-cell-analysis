@@ -5,7 +5,7 @@ const RScriptRunner = require("../models/RScriptRunner");
 router.get("/default", (req, res) => {
 	try {
 		// Usage:
-		const rScriptPath = "goolam.R";
+		const rScriptPath = "rscripts/goolam.R";
 		const rRunner = new RScriptRunner(rScriptPath);
 
 		rRunner.run().then(() => {

@@ -12,6 +12,14 @@ class RScriptRunner {
 		this.dataToSend.push(data);
 	}
 
+	handleJSONData(label, jsonChunk) {
+		try {
+			this.parsedData[label] = JSON.parse(jsonChunk);
+		} catch (error) {
+			console.error(`Error parsing ${label} JSON:`, error);
+		}
+	}
+
 	async run() {
 		this.process = spawn("Rscript", [this.scriptPath]);
 
@@ -43,14 +51,6 @@ class RScriptRunner {
 				resolve();
 			});
 		});
-	}
-
-	handleJSONData(label, jsonChunk) {
-		try {
-			this.parsedData[label] = JSON.parse(jsonChunk);
-		} catch (error) {
-			console.error(`Error parsing ${label} JSON:`, error);
-		}
 	}
 }
 
