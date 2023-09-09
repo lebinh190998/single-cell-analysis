@@ -1,0 +1,53 @@
+/* Chart container styles */
+.chart-container {
+	display: inline-block;
+	margin-right: 20px;
+	background-color: #fff;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+/* Scatterplot chart styles */
+.recharts-wrapper {
+	.recharts-scatter-dots {
+		.recharts-symbols {
+			circle {
+				fill: #007acc;
+				stroke: #fff;
+				stroke-width: 2px;
+			}
+		}
+	}
+}
+
+/* Legend styles */
+.recharts-legend-wrapper {
+	ul {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin-top: 10px;
+
+		li {
+			display: flex;
+			align-items: center;
+			margin-right: 20px;
+
+			span {
+				display: inline-block;
+				width: 12px;
+				height: 12px;
+				margin-right: 5px;
+				border: 2px solid #333;
+				border-radius: 50%;
+			}
+
+			&.inactive {
+				opacity: 0.5;
+			}
+		}
+	}
+}

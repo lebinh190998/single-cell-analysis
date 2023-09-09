@@ -3,99 +3,15 @@
 /* Main container styles */
 .App {
 	text-align: center;
-  min-height: 100vh;
+	min-height: 100vh;
 	font-family: Arial, sans-serif;
-  padding: 20px;
+	padding: 20px;
 }
 
 /* Header styles */
 h1 {
 	margin: 20px 0;
 	font-size: 24px;
-	color: #333; /* Dark gray text */
+	color: #333;
 }
 
-/* Chart container styles */
-.chart-container {
-	display: inline-block;
-	margin-right: 20px;
-	background-color: #fff; /* White background for the chart */
-	padding: 20px;
-	border: 1px solid #ccc; /* Light gray border */
-	border-radius: 5px;
-}
-
-/* Table container styles */
-.table-container {
-	display: inline-block;
-	background-color: #fff; /* White background for the table */
-	padding: 20px;
-	border: 1px solid #ccc; /* Light gray border */
-	border-radius: 5px;
-}
-
-/* Table styles */
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-th,
-td {
-	border: 1px solid #ccc;
-	padding: 10px;
-	text-align: center;
-}
-
-th {
-	background-color: #333; /* Dark gray header background */
-	color: #fff; /* White text for headers */
-}
-
-tr:nth-child(even) {
-	background-color: #f2f2f2; /* Alternate row background color */
-}
-
-/* Scatterplot chart styles */
-.recharts-wrapper {
-	.recharts-scatter-dots {
-		.recharts-symbols {
-			circle {
-				fill: #007acc; /* Blue data point color */
-				stroke: #fff; /* White data point border */
-				stroke-width: 2px;
-			}
-		}
-	}
-}
-
-/* Legend styles */
-.recharts-legend-wrapper {
-	ul {
-		list-style: none;
-		padding: 0;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		margin-top: 10px;
-
-		li {
-			display: flex;
-			align-items: center;
-			margin-right: 20px;
-
-			span {
-				display: inline-block;
-				width: 12px;
-				height: 12px;
-				margin-right: 5px;
-				border: 2px solid #333; /* Dark gray border for legend colors */
-				border-radius: 50%;
-			}
-
-			&.inactive {
-				opacity: 0.5; /* Reduced opacity for inactive legend items */
-			}
-		}
-	}
-}
