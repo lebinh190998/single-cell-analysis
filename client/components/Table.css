@@ -1,13 +1,12 @@
-/* Table container styles */
 .table-container {
 	display: inline-block;
 	background-color: #fff;
 	padding: 20px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
+    vertical-align: top;
 }
 
-/* Table styles */
 table {
 	width: 100%;
 	border-collapse: collapse;
