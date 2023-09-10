@@ -52,12 +52,6 @@
 	}
 }
 
-.button-container {
-	padding: 20px 40px 40px;
-	display: flex;
-	width: 100%;
-}
-
 /* Custom modal styles */
 .custom-modal {
 	background-color: #fff;

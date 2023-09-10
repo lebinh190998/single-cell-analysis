@@ -2,14 +2,39 @@ import { useState } from "react";
 import "./Table.css";
 
 function Table({ data }) {
+	const handleDownloadData = () => {
+		// Set up data
+		const tsvData = `type\tx\ty\n${data
+			.map((row) => `${row.type}\t${row.x}\t${row.y}`)
+			.join("\n")}`;
+
+		const blob = new Blob([tsvData], { type: "text/tsv" });
+
+		// Create download link and trigger download
+		const a = document.createElement("a");
+		a.href = window.URL.createObjectURL(blob);
+		a.download = "data.tsv";
+		a.style.display = "none";
+		document.body.appendChild(a);
+		a.click();
+
+		// Clean up
+		document.body.removeChild(a);
+	};
+
 	return (
 		<div className="table-container">
+			<div className="button-container">
+				<button onClick={handleDownloadData}>
+					<code>Download Data</code>
+				</button>
+			</div>
 			<table>
 				<thead>
 					<tr>
 						<th>Type</th>
-						<th>Gene 1</th>
-						<th>Gene 2</th>
+						<th>Gene X</th>
+						<th>Gene Y</th>
 					</tr>
 				</thead>
 				<tbody>

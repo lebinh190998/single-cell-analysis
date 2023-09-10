@@ -28,13 +28,13 @@ function Chart({ data }) {
 		3: "#5733FF",
 	};
 
-	const handleDownloadChart = () => {
+	const handleUploadData = () => {
 		alert("Upload Data");
 
 		setIsDataModalOpen(false);
 	};
 
-	const handleUploadData = () => {
+	const handleDownloadChart = () => {
 		const chartElement = chartRef.current;
 
 		html2canvas(chartElement, { width: customWidth, height: customHeight }).then(
