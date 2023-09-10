@@ -14,7 +14,11 @@ import Modal from "react-modal";
 
 function Chart({ data }) {
 	const chartRef = useRef(null);
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [dataType, setDataType] = useState("default");
+
+	const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+	const [isDataModalOpen, setIsDataModalOpen] = useState(false);
+
 	const [customWidth, setCustomWidth] = useState(600);
 	const [customHeight, setCustomHeight] = useState(400);
 
@@ -24,7 +28,13 @@ function Chart({ data }) {
 		3: "#5733FF",
 	};
 
-	const handleConfirmDownload = () => {
+	const handleDownloadChart = () => {
+		alert("Upload Data");
+
+		setIsDataModalOpen(false);
+	};
+
+	const handleUploadData = () => {
 		const chartElement = chartRef.current;
 
 		html2canvas(chartElement, { width: customWidth, height: customHeight }).then(
@@ -37,26 +47,51 @@ function Chart({ data }) {
 				downloadLink.click();
 			}
 		);
+
+		setIsDownloadModalOpen(false);
 	};
 
-	const handleDownloadClick = () => {
-		setIsModalOpen(true);
-	};
+	const handleSelectData = (e) => {
+		const dataType = e.target.value;
 
-	const handleCancelDownload = () => {
-		setIsModalOpen(false);
+		setDataType(dataType);
+
+		if (dataType === "custom") {
+			setIsDataModalOpen(true);
+		}
 	};
 
 	return (
 		<div className="chart-container">
 			<div className="button-container">
-				<button onClick={handleDownloadClick}>
+				<select value={dataType} onChange={handleSelectData}>
+					<option value="default">Default</option>
+					<option value="custom">Custom Data</option>
+				</select>
+				<button onClick={() => setIsDownloadModalOpen(true)}>
 					<code>Download Chart</code>
 				</button>
 			</div>
+			<div ref={chartRef}>
+				<ScatterChart width={600} height={400}>
+					<CartesianGrid strokeDasharray="3 3" />
+					<XAxis type="number" dataKey="x" name="Gene 1" />
+					<YAxis type="number" dataKey="y" name="Gene 2" />
+					<Tooltip />
+					<Legend />
+					{data.map((entry, index) => (
+						<Scatter
+							key={index}
+							name={`Type ${entry.type}`}
+							data={[entry]}
+							fill={typeColors[entry.type]}
+						/>
+					))}
+				</ScatterChart>
+			</div>
 			<Modal
-				isOpen={isModalOpen}
-				onRequestClose={() => setIsModalOpen(false)}
+				isOpen={isDownloadModalOpen}
+				onRequestClose={() => setIsDownloadModalOpen(false)}
 				contentLabel="Custom Chart Dimensions"
 				className="custom-modal"
 				overlayClassName="custom-modal-overlay"
@@ -79,26 +114,28 @@ function Chart({ data }) {
 						onChange={(e) => setCustomHeight(Number(e.target.value))}
 					/>
 				</div>
-				<button onClick={handleConfirmDownload}>Confirm</button>
-				<button onClick={handleCancelDownload}>Cancel</button>
+				<button onClick={handleDownloadChart}>Confirm</button>
+				<button onClick={() => setIsDownloadModalOpen(false)}>Cancel</button>
 			</Modal>
-			<div ref={chartRef}>
-				<ScatterChart width={600} height={400}>
-					<CartesianGrid strokeDasharray="3 3" />
-					<XAxis type="number" dataKey="x" name="Gene 1" />
-					<YAxis type="number" dataKey="y" name="Gene 2" />
-					<Tooltip />
-					<Legend />
-					{data.map((entry, index) => (
-						<Scatter
-							key={index}
-							name={`Type ${entry.type}`}
-							data={[entry]}
-							fill={typeColors[entry.type]}
-						/>
-					))}
-				</ScatterChart>
-			</div>
+			<Modal
+				isOpen={isDataModalOpen}
+				onRequestClose={() => setIsDataModalOpen(false)}
+				contentLabel="Custom Data"
+				className="custom-modal"
+				overlayClassName="custom-modal-overlay"
+			>
+				<div>
+					<label htmlFor="width">Upload File:</label>
+					<input
+						type="number"
+						id="width"
+						value={customWidth}
+						onChange={(e) => setCustomWidth(Number(e.target.value))}
+					/>
+				</div>
+				<button onClick={handleUploadData}>Confirm</button>
+				<button onClick={() => setIsDataModalOpen(false)}>Cancel</button>
+			</Modal>
 		</div>
 	);
 }
