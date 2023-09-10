@@ -45,6 +45,9 @@ function Chart({ data }) {
 				downloadLink.href = chartImage;
 				downloadLink.download = "chart.png";
 				downloadLink.click();
+
+				// Clean up
+				document.body.removeChild(downloadLink);
 			}
 		);
 
