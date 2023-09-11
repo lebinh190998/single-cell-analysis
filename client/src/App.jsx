@@ -15,6 +15,7 @@ const URL = "http://localhost:9000";
 
 function App() {
 	const [data, setData] = useState([]);
+  const [latent, setLatent] = useState([]);
 
 	const getData = async () => {
 		const jsonRes = await sendRequest({
@@ -24,6 +25,7 @@ function App() {
 			isJson: true,
 		});
 		setData(jsonRes.data);
+    setLatent(jsonRes.latent);
 	};
 
 	useEffect(() => {
@@ -34,7 +36,7 @@ function App() {
 		<div className="App">
 			<h1>Genome Single Cell Data Visualization</h1>
 			<Chart data={data} />
-			<Table data={data} />
+			<Table data={data} latent={latent}/>
 		</div>
 	);
 }

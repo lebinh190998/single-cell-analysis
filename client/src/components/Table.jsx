@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Table.css";
 
-function Table({ data }) {
+function Table({ data, latent }) {
 	const handleDownloadData = () => {
 		// Set up data
 		const tsvData = `type\tx\ty\n${data
@@ -22,11 +22,32 @@ function Table({ data }) {
 		document.body.removeChild(a);
 	};
 
+	const handleDownloadLatent = () => {
+		// Set up data
+		const tsvData = latent.map((row) => row.join("\t")).join("\n");
+
+		const blob = new Blob([tsvData], { type: "text/tsv" });
+
+		// Create download link and trigger download
+		const a = document.createElement("a");
+		a.href = window.URL.createObjectURL(blob);
+		a.download = "latent.tsv";
+		a.style.display = "none";
+		document.body.appendChild(a);
+		a.click();
+
+		// Clean up
+		document.body.removeChild(a);
+	};
+
 	return (
 		<div className="table-container">
 			<div className="button-container">
 				<button onClick={handleDownloadData}>
 					<code>Download Data</code>
+				</button>
+				<button onClick={handleDownloadLatent}>
+					<code>Download Latent</code>
 				</button>
 			</div>
 			<table>
