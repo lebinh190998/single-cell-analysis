@@ -23,7 +23,6 @@ function App() {
 			headers: new Headers(),
 			isJson: true,
 		});
-		console.log(jsonRes);
 		setData(jsonRes.data);
 	};
 
