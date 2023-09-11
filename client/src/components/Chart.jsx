@@ -14,6 +14,8 @@ import Modal from "react-modal";
 
 function Chart({ data }) {
 	const chartRef = useRef(null);
+	const uniqueTypes = [...new Set(data.map((entry) => entry.type))];
+
 	const [dataType, setDataType] = useState("default");
 
 	const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
@@ -82,12 +84,14 @@ function Chart({ data }) {
 					<YAxis type="number" dataKey="y" name="Gene 2" />
 					<Tooltip />
 					<Legend />
-					{data.map((entry, index) => (
+					{uniqueTypes.map((type, index) => (
 						<Scatter
 							key={index}
-							name={`Type ${entry.type}`}
-							data={[entry]}
-							fill={typeColors[entry.type]}
+							name={`Type ${type}`}
+							data={data.filter((entry) => entry.type === type)}
+							fill={typeColors[type]}
+							line={false}
+							dot={{ r: 1 }}
 						/>
 					))}
 				</ScatterChart>

@@ -11,7 +11,7 @@ router.get("/default", async (req, res) => {
 		const parsedData = await rRunner.run();
 		console.log("cluster length:", parsedData.cluster.length);
 		console.log("pred length:", parsedData.pred.length);
-		const formatData = parsedData.pred.map((cordinate, index) => {
+		const formatedData = parsedData.pred.map((cordinate, index) => {
 			return {
 				type: parsedData.cluster[index],
 				x: cordinate[0],
@@ -19,7 +19,7 @@ router.get("/default", async (req, res) => {
 			};
 		});
 
-		res.send(formatData);
+		res.send({ data: formatedData });
 	} catch (error) {
 		console.error(error);
 		res.status(500).send("Error executing R code");

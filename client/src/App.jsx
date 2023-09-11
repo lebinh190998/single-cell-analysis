@@ -6,6 +6,7 @@ import { sendRequest } from "./utils";
 
 const mockData = [
 	{ type: 1, x: 0.5, y: 3 },
+	{ type: 1, x: 1, y: 1 },
 	{ type: 2, x: 1.0, y: 2 },
 	{ type: 3, x: 1.5, y: 1 },
 ];
@@ -16,14 +17,14 @@ function App() {
 	const [data, setData] = useState([]);
 
 	const getData = async () => {
-		const jsonData = await sendRequest({
+		const jsonRes = await sendRequest({
 			url: `${URL}/analysis/default`,
 			method: "GET",
 			headers: new Headers(),
 			isJson: true,
 		});
-
-		setData(jsonData);
+		console.log(jsonRes);
+		setData(jsonRes.data);
 	};
 
 	useEffect(() => {
