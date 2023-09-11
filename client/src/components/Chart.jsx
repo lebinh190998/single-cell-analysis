@@ -16,11 +16,7 @@ function Chart({ data }) {
 	const chartRef = useRef(null);
 	const uniqueTypes = [...new Set(data.map((entry) => entry.type))];
 
-	const [dataType, setDataType] = useState("default");
-
 	const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
-	const [isDataModalOpen, setIsDataModalOpen] = useState(false);
-
 	const [customWidth, setCustomWidth] = useState(600);
 	const [customHeight, setCustomHeight] = useState(400);
 
@@ -28,12 +24,6 @@ function Chart({ data }) {
 		1: "#FF5733",
 		2: "#33FF57",
 		3: "#5733FF",
-	};
-
-	const handleUploadData = () => {
-		alert("Upload Data");
-
-		setIsDataModalOpen(false);
 	};
 
 	const handleDownloadChart = () => {
@@ -56,23 +46,9 @@ function Chart({ data }) {
 		setIsDownloadModalOpen(false);
 	};
 
-	const handleSelectData = (e) => {
-		const dataType = e.target.value;
-
-		setDataType(dataType);
-
-		if (dataType === "custom") {
-			setIsDataModalOpen(true);
-		}
-	};
-
 	return (
 		<div className="chart-container">
 			<div className="button-container">
-				<select value={dataType} onChange={handleSelectData}>
-					<option value="default">Default</option>
-					<option value="custom">Custom Data</option>
-				</select>
 				<button onClick={() => setIsDownloadModalOpen(true)}>
 					<code>Download Chart</code>
 				</button>
@@ -123,25 +99,6 @@ function Chart({ data }) {
 				</div>
 				<button onClick={handleDownloadChart}>Confirm</button>
 				<button onClick={() => setIsDownloadModalOpen(false)}>Cancel</button>
-			</Modal>
-			<Modal
-				isOpen={isDataModalOpen}
-				onRequestClose={() => setIsDataModalOpen(false)}
-				contentLabel="Custom Data"
-				className="custom-modal"
-				overlayClassName="custom-modal-overlay"
-			>
-				<div>
-					<label htmlFor="width">Upload File:</label>
-					<input
-						type="number"
-						id="width"
-						value={customWidth}
-						onChange={(e) => setCustomWidth(Number(e.target.value))}
-					/>
-				</div>
-				<button onClick={handleUploadData}>Confirm</button>
-				<button onClick={() => setIsDataModalOpen(false)}>Cancel</button>
 			</Modal>
 		</div>
 	);
