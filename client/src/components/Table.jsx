@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo } from "react";
 import "./Table.css";
 
 function Table({ data, latent }) {
@@ -72,4 +72,4 @@ function Table({ data, latent }) {
 	);
 }
 
-export default Table;
+export default memo(Table);

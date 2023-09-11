@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, memo } from "react";
 import "./Chart.css";
 import {
 	ScatterChart,
@@ -147,4 +147,4 @@ function Chart({ data }) {
 	);
 }
 
-export default Chart;
+export default memo(Chart);
