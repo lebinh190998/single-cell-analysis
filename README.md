@@ -66,7 +66,7 @@ Frameworks/libraries used to bootstrap this project.
 * [expressJS](https://expressjs.com/)
 * [Vite](https://vitejs.dev/)
 * [React](https://react.dev/)
-* [scDHA] (https://bioinformatics.cse.unr.edu/software/scDHA/)
+* [scDHA](https://bioinformatics.cse.unr.edu/software/scDHA/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
