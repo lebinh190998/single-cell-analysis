@@ -51,9 +51,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!-- <a href="https://visionpaws.vercel.app/">
+<a href="https://github.com/lebinh190998/single-cell-analysis">
     <img align="center" src="static/cover.png" alt="Cover Image" width="800" height="400">
-</a> -->
+</a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
