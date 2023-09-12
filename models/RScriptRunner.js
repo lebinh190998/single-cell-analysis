@@ -3,11 +3,11 @@ const { spawn } = require("child_process");
 class RScriptRunner {
 	constructor(scriptPath) {
 		this.scriptPath = scriptPath;
-		this.dataToSend = [];
+		this.customFilePath = null;
 	}
 
-	sendData(data) {
-		this.dataToSend.push(data);
+	sendData(filePath) {
+		this.customFilePath = filePath;
 	}
 
 	async run() {
@@ -15,8 +15,8 @@ class RScriptRunner {
 			const process = spawn("Rscript", [this.scriptPath]);
 			let accumulatedData = "";
 
-			for (const data of this.dataToSend) {
-				process.stdin.write(JSON.stringify(data) + "\n");
+			if (this.customFilePath) {
+				process.stdin.write(this.customFilePath + "\n");
 			}
 			process.stdin.end();
 

@@ -21,16 +21,39 @@ function App() {
 	const [latent, setLatent] = useState([]);
 	const [dataType, setDataType] = useState("default");
 	const [isDataModalOpen, setIsDataModalOpen] = useState(false);
+	const [selectedFile, setSelectedFile] = useState(null);
 
 	const getData = async () => {
 		setIsLoading(true);
 
-		const jsonRes = await sendRequest({
-			url: `${URL}/analysis/default`,
-			method: "GET",
-			headers: new Headers(),
-			isJson: true,
-		});
+		let jsonRes = {
+			data: [],
+			latent: [],
+		};
+
+		if (dataType === "default") {
+			// const jsonRes = await sendRequest({
+			// 	url: `${URL}/analysis/default`,
+			// 	method: "GET",
+			// 	headers: new Headers(),
+			// 	isJson: true,
+			// });
+			console.log("load default");
+		} else {
+			if (selectedFile) {
+				const formData = new FormData();
+				formData.append("file", selectedFile);
+
+				jsonRes = await sendRequest({
+					url: `${URL}/analysis/custom-data`,
+					method: "POST",
+					headers: new Headers(),
+					body: formData,
+					isJson: true,
+				});
+			}
+		}
+
 		setData(jsonRes.data);
 		setLatent(jsonRes.latent);
 
@@ -40,22 +63,21 @@ function App() {
 	const handleSelectData = (e) => {
 		const dataType = e.target.value;
 
-		setDataType(dataType);
-
-		if (dataType === "custom") {
+		if (dataType === "default") {
+			setDataType(dataType);
+		} else {
 			setIsDataModalOpen(true);
 		}
 	};
 
 	const handleUploadData = () => {
-		alert("Upload Data");
-
+		setDataType("custom");
 		setIsDataModalOpen(false);
 	};
 
 	useEffect(() => {
 		getData();
-	}, []);
+	}, [dataType]);
 
 	return (
 		<div className="App">
@@ -78,11 +100,7 @@ function App() {
 			>
 				<div>
 					<label htmlFor="width">Upload File:</label>
-					<input
-						type="number"
-						id="width"
-						onChange={(e) => console.log(e.target.value)}
-					/>
+					<input type="file" onChange={(e) => setSelectedFile(e.target.files[0])} />
 				</div>
 				<button onClick={handleUploadData}>Confirm</button>
 				<button onClick={() => setIsDataModalOpen(false)}>Cancel</button>

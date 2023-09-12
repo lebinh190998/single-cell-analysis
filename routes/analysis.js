@@ -1,6 +1,19 @@
 const express = require("express");
-const router = express.Router();
+const multer = require("multer");
 const RScriptRunner = require("../models/RScriptRunner");
+const utils = require("../utils");
+
+const router = express.Router();
+
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, "./uploads");
+	},
+	filename: (req, file, cb) => {
+		cb(null, file.originalname);
+	},
+});
+const upload = multer({ storage });
 
 router.get("/default", async (req, res) => {
 	try {
@@ -10,32 +23,32 @@ router.get("/default", async (req, res) => {
 
 		const parsedData = await rRunner.run();
 
-		// Merge predicted data with its type  
-		const formatedData = parsedData.pred.map((coordinate, index) => {
-			return {
-				type: parsedData.cluster[index],
-				x: coordinate[0],
-				y: coordinate[1],
-			};
+		res.status(200).send({
+			data: utils.mergePredClusterData(parsedData.pred, parsedData.cluster),
+			latent: parsedData.latent ?? [],
 		});
-
-		res.send({ data: formatedData, latent: parsedData.latent });
 	} catch (error) {
 		console.error(error);
 		res.status(500).send("Error executing R code");
 	}
 });
 
-router.post("/custom-data", async (req, res) => {
+router.post("/custom-data", upload.single("file"), async (req, res) => {
 	try {
-		// Usage:
-		const rScriptPath = "customData.R";
+		if (!req.file) {
+			return res.status(400).send("No file uploaded.");
+		}
+		const rScriptPath = "rscripts/custom.R";
 		const rRunner = new RScriptRunner(rScriptPath);
 
-		rRunner.sendData(req.body);
+		rRunner.sendData(req.file.path);
 
 		const parsedData = await rRunner.run();
-		res.send(parsedData);
+
+		res.status(200).send({
+			data: utils.mergePredClusterData(parsedData.pred, parsedData.cluster),
+			latent: parsedData.latent ?? [],
+		});
 	} catch (error) {
 		console.error(error);
 		res.status(500).send("Error executing R code");
