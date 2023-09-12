@@ -4,6 +4,8 @@
 	"description": "Application for scDHA",
 	"main": "server.js",
 	"scripts": {
+		"setup-client": "npm install --prefix client",
+		"setup": "npm install && npm run setup-client",
 		"start": "node server",
 		"server": "nodemon server",
 		"client": "npm run dev --prefix client",

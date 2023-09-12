@@ -32,13 +32,12 @@ function App() {
 		};
 
 		if (dataType === "default") {
-			// const jsonRes = await sendRequest({
-			// 	url: `${URL}/analysis/default`,
-			// 	method: "GET",
-			// 	headers: new Headers(),
-			// 	isJson: true,
-			// });
-			console.log("load default");
+			jsonRes = await sendRequest({
+				url: `${URL}/analysis/default`,
+				method: "GET",
+				headers: new Headers(),
+				isJson: true,
+			});
 		} else {
 			if (selectedFile) {
 				const formData = new FormData();
