@@ -96,7 +96,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm run dev
    ```
-5. The project can be accessed at `http://localhost:5173/`
+5. The project can be accessed at `http://localhost:5173/` , please note the data can take up to `1 minute` to be loaded
 6. To test the endpoint separatedly, go to `http://localhost:9000/docs/#/`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
