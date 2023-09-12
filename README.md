@@ -77,9 +77,6 @@ Frameworks/libraries used to bootstrap this project.
 
 To get a local copy up and running follow these simple example steps.
 
-
-### Scripts
-
 1. Clone the repo
    ```sh
    git clone https://github.com/lebinh190998/single-cell-analysis.git
